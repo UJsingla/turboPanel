@@ -1,0 +1,40 @@
+<div class="logs-shell">
+  <header class="space-y-2 module-header">
+    <p class="uppercase tracking-[0.18em] text-[11px] text-slate-400">Module</p>
+    <div class="flex items-center justify-between gap-4">
+      <div>
+        <h2 class="text-2xl font-semibold text-slate-100">Live Logs</h2>
+        <p class="text-slate-400">Simulated stream with neon badges.</p>
+      </div>
+      <div class="flex items-center gap-2 text-sm text-slate-300">
+        <span class="h-2 w-2 rounded-full" [ngClass]="running ? 'bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.5)]' : 'bg-slate-500'"></span>
+        <span>{{ running ? 'Streaming' : 'Paused' }}</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex flex-wrap gap-2">
+    <ui-btn (click)="toggle()">
+      {{ running ? 'Pause' : 'Resume' }}
+    </ui-btn>
+    <ui-btn (click)="clear()">Clear</ui-btn>
+  </div>
+
+  <div class="scroll-pane">
+    <div class="log-container surface-panel backdrop-blur">
+      <div class="log-lines">
+        <div
+          *ngFor="let log of logs()"
+          class="log-line"
+          [ngClass]="levelClass(log.level)"
+        >
+          <span class="timestamp">{{ log.timestamp }}</span>
+          <ui-pill [className]="'pill-level ' + pillClass(log.level)">{{ log.level }}</ui-pill>
+          <span class="message">{{ log.message }}</span>
+        </div>
+        <div *ngIf="!logs().length" class="text-slate-500 text-sm px-4 py-3">No logs yet.</div>
+      </div>
+    </div>
+  </div>
+</div>
+

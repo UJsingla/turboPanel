@@ -1,0 +1,207 @@
+:host {
+  display: block;
+  width: 100%;
+}
+.tickets-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  min-height: 0;
+}
+.action-btn {
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  font-weight: 600;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.2s ease;
+}
+.action-btn:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+.row-frame {
+  box-shadow:
+    inset 0 0 0 1px rgba(59, 130, 246, 0.4),
+    inset 0 0 0 2px rgba(14, 165, 233, 0.2);
+}
+.tickets-shell {
+  max-width: none;
+}
+.table-shell {
+  width: 100%;
+  max-width: none;
+}
+.table-fill {
+  width: 100%;
+  max-width: none;
+  table-layout: fixed;
+  min-width: 720px;
+}
+.table-fill th,
+.table-fill td {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+.table-view {
+  display: block;
+}
+.card-view {
+  display: none;
+}
+header.module-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  backdrop-filter: blur(8px);
+  padding-bottom: 6px;
+}
+.filter-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  width: 100%;
+  gap: 0;
+}
+.filter-pill {
+  min-width: 0;
+  padding: 14px 12px;
+  min-height: 68px;
+  border-radius: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.filter-pill:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.25);
+}
+.filter-pill-active {
+  border-color: rgba(59, 130, 246, 0.7);
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.35);
+  background: rgba(59, 130, 246, 0.12);
+}
+.filter-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+.filter-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: #e2e8f0;
+  line-height: 1.2;
+}
+.table-wrapper {
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .table-wrapper {
+    max-height: 55vh;
+  }
+  .table-shell {
+    padding-inline: 8px;
+  }
+  .filter-row {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .table-fill {
+    min-width: 560px;
+  }
+  .table-fill th,
+  .table-fill td {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    font-size: 13px;
+  }
+  .filter-pill {
+    min-height: 60px;
+    padding: 12px 10px;
+  }
+  .table-view {
+    display: none;
+  }
+  .card-view {
+    display: flex;
+    flex-direction: column;
+  }
+  .ticket-card {
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    border-radius: 12px;
+    padding: 12px;
+    background: rgba(15, 23, 42, 0.7);
+    box-shadow:
+      inset 0 0 0 1px rgba(59, 130, 246, 0.2),
+      0 8px 24px rgba(0, 0, 0, 0.35);
+    display: grid;
+    gap: 8px;
+  }
+  .ticket-card.card-a {
+    background: rgba(15, 23, 42, 0.75);
+  }
+  .ticket-card.card-b {
+    background: rgba(12, 18, 32, 0.75);
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #cbd5e1;
+  }
+  .card-id {
+    font-weight: 700;
+    color: #e2e8f0;
+  }
+  .card-date {
+    font-variant-numeric: tabular-nums;
+    color: #cbd5e1;
+    font-size: 12px;
+  }
+  .card-subject {
+    font-weight: 700;
+    color: #e2e8f0;
+    line-height: 1.35;
+  }
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .pill.priority {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pill.status {
+    background: rgba(59, 130, 246, 0.12);
+    border-color: rgba(59, 130, 246, 0.4);
+    color: #bfdbfe;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+  }
+  .assignee {
+    color: #cbd5e1;
+    font-weight: 600;
+    font-size: 12px;
+  }
+}
+

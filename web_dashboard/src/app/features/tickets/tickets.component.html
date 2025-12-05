@@ -1,0 +1,103 @@
+<div class="space-y-4 w-full tickets-shell">
+  <header class="space-y-2">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400">Module</p>
+        <h2 class="text-2xl font-semibold text-slate-100">Tickets</h2>
+        <p class="text-slate-400 text-sm">Manage tickets and track performance</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="panel-body">
+    <div class="filter-row w-full">
+      <ui-btn
+        *ngFor="let card of cardFilters"
+        type="button"
+        [block]="true"
+        [className]="'filter-pill ' + (activeTab() === card.value ? 'filter-pill-active' : '')"
+        (click)="activeTab.set(card.value)"
+      >
+        <span class="filter-label">{{ card.label }}</span>
+        <span class="filter-value">{{ card.count() }}</span>
+      </ui-btn>
+    </div>
+
+    <div class="scroll-pane">
+      <div class="table-wrapper table-view surface-panel w-full table-shell">
+        <table class="w-full table-auto divide-y divide-white/5 table-fill">
+          <thead class="bg-white/5 text-[12px] uppercase tracking-wide text-slate-300">
+            <tr>
+              <th class="px-4 py-3 text-left">Ticket ID</th>
+              <th class="px-4 py-3 text-left">Subject</th>
+              <th class="px-4 py-3 text-left cursor-pointer select-none" (click)="toggleSort()">
+                <span class="inline-flex items-center gap-1">
+                  Created
+                  <span class="text-[10px] opacity-70">{{ sortDir() === 'asc' ? '↑' : '↓' }}</span>
+                </span>
+              </th>
+              <th class="px-4 py-3 text-left">Assignee</th>
+              <th class="px-4 py-3 text-left">Status</th>
+              <th class="px-4 py-3 text-left">Priority</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/5 text-sm text-slate-100">
+            <tr
+              *ngFor="let ticket of displayTickets(); let i = index"
+              [ngClass]="[
+                i % 2 === 0 ? 'bg-slate-950/40' : 'bg-slate-900/40',
+                'row-frame'
+              ]"
+              class="transition hover:bg-white/10"
+            >
+              <td class="px-4 py-3 font-semibold text-slate-100">{{ ticket.id }}</td>
+              <td class="px-4 py-3">
+                <div class="font-semibold">{{ ticket.subject }}</div>
+              </td>
+              <td class="px-4 py-3 text-slate-200 text-sm">{{ ticket.createdAt | date: 'MMM d, y' }}</td>
+              <td class="px-4 py-3">
+                <span class="text-slate-100 font-medium">{{ ticket.assignee }}</span>
+              </td>
+              <td class="px-4 py-3">
+                <ui-pill [className]="['status-pill', 'no-border']" [ngClass]="statusBadgeClass(ticket.status)">{{ ticket.status }}</ui-pill>
+              </td>
+              <td class="px-4 py-3">
+                <ui-pill [className]="['priority-pill', 'no-border']" [ngClass]="priorityBadgeClass(ticket.priority)">
+                  <span class="h-2 w-2 rounded-full" [ngClass]="priorityDotClass(ticket.priority)"></span>
+                  {{ ticket.priority }}
+                </ui-pill>
+              </td>
+            </tr>
+            <tr *ngIf="!filteredTickets().length">
+              <td colspan="5" class="px-4 py-6 text-center text-slate-400">No tickets match this filter.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card-view space-y-3">
+        <div
+          *ngFor="let ticket of displayTickets(); let i = index"
+          class="ticket-card surface-panel"
+          [ngClass]="i % 2 === 0 ? 'card-a' : 'card-b'"
+        >
+          <div class="card-header">
+            <span class="card-id">{{ ticket.id }}</span>
+            <span class="card-date">{{ ticket.createdAt | date: 'MMM d, y' }}</span>
+          </div>
+          <div class="card-subject">{{ ticket.subject }}</div>
+          <div class="card-meta">
+            <ui-pill [className]="['status-pill', 'no-border']" [ngClass]="statusBadgeClass(ticket.status)">{{ ticket.status }}</ui-pill>
+            <ui-pill [className]="['priority-pill', 'no-border']" [ngClass]="priorityBadgeClass(ticket.priority)">
+              <span class="dot" [ngClass]="priorityDotClass(ticket.priority)"></span>
+              {{ ticket.priority }}
+            </ui-pill>
+            <div class="assignee">{{ ticket.assignee || 'Unassigned' }}</div>
+          </div>
+        </div>
+        <div *ngIf="!filteredTickets().length" class="text-slate-400 text-center py-4 text-sm">No tickets match this filter.</div>
+      </div>
+    </div>
+  </div>
+</div>
+

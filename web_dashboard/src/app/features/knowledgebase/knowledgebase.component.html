@@ -1,0 +1,61 @@
+<div class="kb-shell">
+  <header class="space-y-2 module-header">
+    <p class="uppercase tracking-[0.18em] text-[11px] text-slate-400">Module</p>
+    <div class="flex items-center justify-between gap-4">
+      <div>
+        <h2 class="text-2xl font-semibold text-slate-100">Knowledgebase Editor</h2>
+        <p class="text-slate-400">Write content and preview markdown.</p>
+      </div>
+      <div class="flex items-center gap-2 text-sm text-slate-300">
+        <span class="h-2 w-2 rounded-full bg-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.5)]"></span>
+        <span>{{ content().length }} chars</span>
+      </div>
+    </div>
+  </header>
+
+      <div class="scroll-pane">
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+          <ui-btn (click)="previewMode.set(false)" [className]="toggleClass(!previewMode())">
+            Edit
+          </ui-btn>
+          <ui-btn (click)="previewMode.set(true)" [className]="toggleClass(previewMode())">
+            Preview
+          </ui-btn>
+          <ui-pill [className]="previewMode() ? 'mode-pill preview' : 'mode-pill edit'">
+            {{ previewMode() ? 'Preview mode' : 'Edit mode' }}
+          </ui-pill>
+          <div class="flex-1"></div>
+          <ui-btn class="px-4 py-2 rounded-lg bg-emerald-500/90 text-slate-950 font-semibold shadow-[0_10px_30px_rgba(16,185,129,0.35)] hover:brightness-110 transition" (click)="saveDraft()">
+            Save (console log)
+          </ui-btn>
+        </div>
+
+    <div class="grid lg:grid-cols-2 gap-4">
+          <div class="surface-panel p-4 backdrop-blur" [ngClass]="{ 'is-disabled': previewMode() }">
+        <div class="flex items-center justify-between mb-2">
+          <label class="block text-sm font-semibold text-slate-200">
+            Content
+            <span class="mode-hint" *ngIf="previewMode()">(locked in preview)</span>
+          </label>
+          <div class="flex items-center gap-2 text-xs text-slate-300">
+                <ui-btn class="pill" (click)="copy()">{{ copied() ? 'Copied' : 'Copy' }}</ui-btn>
+                <ui-btn class="pill" (click)="clear()">Clear</ui-btn>
+          </div>
+        </div>
+        <textarea
+          class="w-full min-h-[320px] rounded-lg border border-white/10 bg-slate-800/80 p-3 text-slate-100 outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400"
+          [(ngModel)]="contentValue"
+          [disabled]="previewMode()"
+          placeholder="# Heading\n\nWrite knowledgebase content here..."
+        ></textarea>
+      </div>
+
+      <div class="surface-panel p-4 backdrop-blur">
+        <label class="block text-sm font-semibold text-slate-200 mb-2">Preview</label>
+        <div class="prose prose-invert prose-sm max-w-none text-slate-100 leading-relaxed" [innerHTML]="rendered()"></div>
+        <p *ngIf="!content().length" class="text-slate-500 text-sm">Nothing to preview yet.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
