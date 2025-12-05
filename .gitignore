@@ -1,0 +1,42 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+.env
+.env.*
+
+# Angular / Node (dashboard)
+dashboard/node_modules/
+dashboard/dist/
+dashboard/.angular/cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Flutter / Dart (chat)
+chat/.dart_tool/
+chat/.packages
+chat/.flutter-plugins
+chat/.flutter-plugins-dependencies
+chat/.metadata
+chat/build/
+chat/ios/Pods/
+chat/ios/Flutter/ephemeral/
+chat/macos/Flutter/ephemeral/
+chat/linux/flutter/ephemeral/
+chat/windows/flutter/ephemeral/
+
+# Tooling / IDE
+.idea/
+.vscode/
+*.iml
+.dart_tool
+.idea
+.vscode
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-plugins.json
+.flutter-plugins.lock
+.flutter-plugins.lock
