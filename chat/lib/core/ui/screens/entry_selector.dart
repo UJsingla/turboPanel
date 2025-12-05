@@ -40,8 +40,6 @@ class _EntrySelectorPageState extends State<EntrySelectorPage> {
               ),
               Expanded(
                 child: TabBarView(
-                  physics:
-                      const NeverScrollableScrollPhysics(), // prevent over-sensitive swipes
                   children: [
                     ChatPage(
                       onUnreadCountChanged: (count) {
