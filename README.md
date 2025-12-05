@@ -13,6 +13,7 @@
 ## Run the Flutter app with WebView
 - `cd chat`
 - Install deps: `flutter pub get`
+-for ios: cd ios => pod install
 - Start the app: `flutter run 
 - select the device
 
