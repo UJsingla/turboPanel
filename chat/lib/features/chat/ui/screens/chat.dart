@@ -326,9 +326,6 @@ class _ChatPageState extends State<ChatPage> {
           ),
           // Main content with manual SafeArea for top, left, right
           SafeArea(
-            top: true,
-            left: true,
-            right: true,
             bottom: false,
             child: MediaQuery.removeViewInsets(
               context: context,

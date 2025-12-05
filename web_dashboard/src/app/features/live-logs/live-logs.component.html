@@ -22,7 +22,7 @@
 
   <div class="scroll-pane">
     <div class="log-container surface-panel backdrop-blur">
-      <div class="log-lines">
+      <div class="log-lines" #logLines>
         <div
           *ngFor="let log of logs()"
           class="log-line"

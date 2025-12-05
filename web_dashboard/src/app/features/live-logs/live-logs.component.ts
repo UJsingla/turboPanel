@@ -1,4 +1,4 @@
-import { Component, OnDestroy, NgZone, signal } from '@angular/core';
+import { Component, OnDestroy, NgZone, signal, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { interval, map, startWith, Subscription } from 'rxjs';
 import { UiButtonComponent } from '../../shared/ui-button.component';
@@ -19,13 +19,18 @@ interface LogLine {
   templateUrl: './live-logs.component.html',
   styleUrls: ['./live-logs.component.scss']
 })
-export class LiveLogsComponent implements OnDestroy {
+export class LiveLogsComponent implements OnDestroy, AfterViewInit {
   logs = signal<LogLine[]>([]);
   running = true;
   private sub?: Subscription;
+  @ViewChild('logLines') logLines?: ElementRef<HTMLDivElement>;
 
   constructor(private readonly zone: NgZone) {
     this.startStream();
+  }
+
+  ngAfterViewInit() {
+    this.scrollToBottomAsync();
   }
 
   ngOnDestroy() {
@@ -50,6 +55,7 @@ export class LiveLogsComponent implements OnDestroy {
       .subscribe((log) => {
         this.zone.run(() => {
           this.logs.update((curr) => [...curr, log].slice(-200));
+          this.scrollToBottomAsync();
         });
       });
   }
@@ -57,6 +63,14 @@ export class LiveLogsComponent implements OnDestroy {
   private stopStream() {
     this.sub?.unsubscribe();
     this.sub = undefined;
+  }
+
+  private scrollToBottomAsync() {
+    queueMicrotask(() => {
+      const el = this.logLines?.nativeElement;
+      if (!el) return;
+      el.scrollTop = el.scrollHeight;
+    });
   }
 
   private randomLog(): LogLine {

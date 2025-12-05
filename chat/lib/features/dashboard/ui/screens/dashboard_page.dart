@@ -35,9 +35,12 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       extendBodyBehindAppBar: false,
       backgroundColor: Colors.transparent,
-      body: SafeArea(
+      body: MediaQuery.removePadding(
+        context: context,
+        removeBottom: true, // no bottom safe area for WebView
         child: Stack(
           children: [
             // Fade-in background to match the dashboard while the page loads.

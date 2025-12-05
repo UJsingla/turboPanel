@@ -30,20 +30,7 @@ class _LoadingPageState extends State<LoadingPage> {
     return const Scaffold(
       extendBodyBehindAppBar: false,
       backgroundColor: Colors.transparent,
-      body: SafeArea(
-        top: true,
-        bottom: false,
-        child: Stack(
-          children: [
-            Center(child: CircularProgressIndicator(color: Colors.white)),
-            SafeArea(
-              top: false,
-              bottom: true,
-              child: ColoredBox(color: Colors.black, child: SizedBox.expand()),
-            ),
-          ],
-        ),
-      ),
+      body: Center(child: CircularProgressIndicator(color: Colors.white)),
     );
   }
 }

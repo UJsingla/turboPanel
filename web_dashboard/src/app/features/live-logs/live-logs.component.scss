@@ -13,13 +13,16 @@
   padding-bottom: 6px;
 }
 .log-container {
+  flex: 1;
+  min-height: 0;
   max-height: 340px;
   overflow: hidden;
 }
 .log-lines {
   max-height: 340px;
+  min-height: 0;
   overflow-y: auto;
-  padding: 8px 0;
+  padding: 8px 0 30px; /* extra bottom padding so last row isn't clipped */
 }
 .log-line {
   display: grid;

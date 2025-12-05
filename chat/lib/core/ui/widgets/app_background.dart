@@ -30,21 +30,7 @@ class TurboBackground extends StatelessWidget {
             ),
           ),
         ),
-        // SafeArea only for top, left, right
-        SafeArea(
-          top: true,
-          left: true,
-          right: true,
-          bottom: false,
-          child: child,
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            height: MediaQuery.of(context).padding.bottom,
-            color: Colors.black,
-          ),
-        ),
+        SafeArea(bottom: false, right: false, left: false, child: child),
       ],
     );
   }
