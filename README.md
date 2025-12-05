@@ -5,7 +5,7 @@
 - Both Flutter device/emulator and the host machine must be on the same network for WebView to reach the Angular server (unless iOS simulator using `localhost`).
 
 ## Start the Angular HTTP server
-- `cd dashboard`
+- `cd web_dashboard`
 - Install deps once: `npm install`
 - Run dev server: `npm run start` (alias for `ng serve --host 0.0.0.0 --port 4200`)
 - Open: `http://localhost:4200/`
